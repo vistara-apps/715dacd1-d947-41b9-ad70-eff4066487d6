@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useMiniKit } from '@coinbase/minikit';
-import { useAuthenticate } from '@coinbase/onchainkit/minikit';
+// import { useMiniKit, useAuthenticate } from '@coinbase/onchainkit';
 import { ConnectWallet } from './ConnectWallet';
 import { RepositorySelector } from './RepositorySelector';
 import { DeploymentCard } from './DeploymentCard';
@@ -11,8 +10,8 @@ import { type Deployment, type Repository } from '../lib/types';
 import { Plus, GitBranch } from 'lucide-react';
 
 export function DeploymentDashboard() {
-  const { context } = useMiniKit();
-  const { user } = useAuthenticate();
+  // const { context } = useMiniKit();
+  // const { user } = useAuthenticate();
   const [deployments, setDeployments] = useState<Deployment[]>([]);
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
@@ -21,61 +20,59 @@ export function DeploymentDashboard() {
 
   // Mock data for demonstration
   useEffect(() => {
-    if (user || context?.user) {
-      // Simulate loading deployments
-      const mockDeployments: Deployment[] = [
-        {
-          id: '1',
-          userId: 'user1',
-          repoUrl: 'https://github.com/user/my-dapp',
-          branch: 'main',
-          commitHash: 'abc123def456',
-          status: 'success',
-          createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
-          deployedUrl: 'https://my-dapp-abc123.deploykit.app',
-        },
-        {
-          id: '2',
-          userId: 'user1',
-          repoUrl: 'https://github.com/user/another-app',
-          branch: 'main',
-          commitHash: 'def456ghi789',
-          status: 'pending',
-          createdAt: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
-        },
-      ];
-      setDeployments(mockDeployments);
+    // Simulate loading deployments
+    const mockDeployments: Deployment[] = [
+      {
+        id: '1',
+        userId: 'user1',
+        repoUrl: 'https://github.com/user/my-dapp',
+        branch: 'main',
+        commitHash: 'abc123def456',
+        status: 'success',
+        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+        deployedUrl: 'https://my-dapp-abc123.deploykit.app',
+      },
+      {
+        id: '2',
+        userId: 'user1',
+        repoUrl: 'https://github.com/user/another-app',
+        branch: 'main',
+        commitHash: 'def456ghi789',
+        status: 'pending',
+        createdAt: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
+      },
+    ];
+    setDeployments(mockDeployments);
 
-      // Simulate loading repositories
-      const mockRepos: Repository[] = [
-        {
-          id: 1,
-          name: 'my-dapp',
-          full_name: 'user/my-dapp',
-          description: 'A decentralized application built with Next.js',
-          html_url: 'https://github.com/user/my-dapp',
-          clone_url: 'https://github.com/user/my-dapp.git',
-          default_branch: 'main',
-          updated_at: '2024-01-15T10:30:00Z',
-          language: 'TypeScript',
-          private: false,
-        },
-        {
-          id: 2,
-          name: 'another-app',
-          full_name: 'user/another-app',
-          description: 'React application with Web3 integration',
-          html_url: 'https://github.com/user/another-app',
-          clone_url: 'https://github.com/user/another-app.git',
-          default_branch: 'main',
-          updated_at: '2024-01-14T15:45:00Z',
-          language: 'JavaScript',
-          private: false,
-        },
-      ];
-      setRepositories(mockRepos);
-    }
-  }, [user, context?.user]);
+    // Simulate loading repositories
+    const mockRepos: Repository[] = [
+      {
+        id: 1,
+        name: 'my-dapp',
+        full_name: 'user/my-dapp',
+        description: 'A decentralized application built with Next.js',
+        html_url: 'https://github.com/user/my-dapp',
+        clone_url: 'https://github.com/user/my-dapp.git',
+        default_branch: 'main',
+        updated_at: '2024-01-15T10:30:00Z',
+        language: 'TypeScript',
+        private: false,
+      },
+      {
+        id: 2,
+        name: 'another-app',
+        full_name: 'user/another-app',
+        description: 'React application with Web3 integration',
+        html_url: 'https://github.com/user/another-app',
+        clone_url: 'https://github.com/user/another-app.git',
+        default_branch: 'main',
+        updated_at: '2024-01-14T15:45:00Z',
+        language: 'JavaScript',
+        private: false,
+      },
+    ];
+    setRepositories(mockRepos);
+  }, []);
 
   const handleDeploy = async (repo: Repository) => {
     if (!repo) return;
@@ -128,10 +125,6 @@ export function DeploymentDashboard() {
       setIsDeploying(false);
     }
   };
-
-  if (!user && !context?.user) {
-    return <ConnectWallet />;
-  }
 
   return (
     <div className="space-y-6 animate-fade-in">

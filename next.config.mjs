@@ -5,7 +5,6 @@ const nextConfig = {
     domains: ['avatars.githubusercontent.com', 'github.com'],
   },
   env: {
-    NEXT_PUBLIC_MINIKIT_API_KEY: process.env.NEXT_PUBLIC_MINIKIT_API_KEY,
     NEXT_PUBLIC_ONCHAINKIT_API_KEY: process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY,
   },
 };
