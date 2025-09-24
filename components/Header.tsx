@@ -1,12 +1,11 @@
 'use client';
 
-import { useMiniKit } from '@coinbase/minikit';
-import { useAuthenticate } from '@coinbase/onchainkit/minikit';
+// import { useMiniKit, useAuthenticate } from '@coinbase/onchainkit';
 import { Rocket, User } from 'lucide-react';
 
 export function Header() {
-  const { context } = useMiniKit();
-  const { user } = useAuthenticate();
+  // const { context } = useMiniKit();
+  // const { user } = useAuthenticate();
 
   return (
     <header className="bg-surface border-b border-text-secondary/10">
@@ -23,20 +22,9 @@ export function Header() {
           </div>
           
           <div className="flex items-center space-x-2">
-            {user || context?.user ? (
-              <div className="flex items-center space-x-2">
-                <div className="bg-primary/10 p-2 rounded-full">
-                  <User className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-sm text-text-primary">
-                  {context?.user?.displayName || 'Connected'}
-                </span>
-              </div>
-            ) : (
-              <div className="text-sm text-text-secondary">
-                Not connected
-              </div>
-            )}
+            <div className="text-sm text-text-secondary">
+              Not connected
+            </div>
           </div>
         </div>
       </div>

@@ -1,10 +1,8 @@
 'use client';
 
-import { useMiniKit } from '@coinbase/minikit';
 import { Wallet, Zap, Shield, Rocket } from 'lucide-react';
 
 export function ConnectWallet() {
-  const { context } = useMiniKit();
 
   const handleConnect = async () => {
     try {
